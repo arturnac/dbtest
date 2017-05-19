@@ -1,10 +1,16 @@
 import paho.mqtt.client as paho
 from pymongo import MongoClient
 
-client = MongoClient()
-dbClient = MongoClient('mongodb://0.0.0.0:27017')
+print("connecting to mongo")
+client = MongoClient('mongodb://mongo:27017')
+print("connected to mongo")
 db = client.rpi
 collection = db.cpu
+print("inserting one into mongo")
+post_id = collection.insert_one({'meh':'meh'}).inserted_id
+print("inserted one")
+post_id = collection.insert_one({'meh':'meh'}).inserted_id
+print("inserted one")
 
 def on_message(client, userdata, msg):
 	print(msg.topic+" "+str(msg.payload))
